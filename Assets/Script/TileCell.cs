@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TileCell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2Int coordinates {  get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Tile tile { get; set; }
+
+    public bool emty => tile == null;
+    public bool occupied => tile != null;
+
+
+
 }
