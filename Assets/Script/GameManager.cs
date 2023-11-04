@@ -7,8 +7,12 @@ public class GameManager : MonoBehaviour
 {
     public TileBoard board;
     public CanvasGroup gameOver;
+    public CanvasGroup gameWin;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
+
+    public AudioSource winSound;
+    public AudioSource gameOverAudio;
 
     private int score;
 
@@ -23,6 +27,8 @@ public class GameManager : MonoBehaviour
         hiscoreText.text = LoadHiscore().ToString();
         gameOver.alpha = 0f;
         gameOver.interactable = false;
+        gameWin.alpha = 0f;
+        gameWin.interactable = false;
 
         board.ClearBoard();
         board.CreateTile();
@@ -35,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         board.enabled = false;
         gameOver.interactable = true;
-
+        gameOverAudio.Play();
         StartCoroutine(Fade(gameOver, 1f, 1f));
     }
 
@@ -61,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void InscreaseScore(int points)
     {
         SetScore(score + points);
+        
     }
 
     private void SetScore(int score)
@@ -81,9 +88,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void WinGame()
+    {
+        board.enabled = false;
+        gameWin.interactable = true;
+        gameOverAudio.Play();
+        StartCoroutine(Fade(gameWin, 1f, 1f));
+    }
+
     private int LoadHiscore()
     {
         return PlayerPrefs.GetInt("hiscore", 0);
+    }
+
+    public void Continue()
+    {
+        board.enabled = true;
+        gameWin.interactable = false;
     }
 
 }

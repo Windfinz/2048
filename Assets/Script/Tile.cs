@@ -6,6 +6,7 @@ using TMPro;
 
 public class Tile : MonoBehaviour
 {
+    GameManager gameManager;
     public TileState state {  get; private set; }
     public TileCell cell { get; private set; }
     public int number { get; private set; }
@@ -52,6 +53,12 @@ public class Tile : MonoBehaviour
         cell.tile.locked = true;
 
         StartCoroutine(Animate(cell.transform.position, true));
+
+        if(number == 2048)
+        {
+            gameManager.WinGame();
+        }
+
     }
 
 
