@@ -14,15 +14,19 @@ public class GameManager : MonoBehaviour
     public AudioSource winSound;
     public AudioSource gameOverAudio;
 
+    public GameObject gameWinCanvas;
+
     private int score;
 
     private void Start()
     {
+        gameWinCanvas.SetActive(false);
         NewGame();
     }
 
     public void NewGame()
     {
+        gameWinCanvas.SetActive(false);
         SetScore(0);
         hiscoreText.text = LoadHiscore().ToString();
         gameOver.alpha = 0f;
@@ -90,6 +94,7 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
+        gameWinCanvas.SetActive(true);
         board.enabled = false;
         gameWin.interactable = true;
         gameOverAudio.Play();
@@ -103,8 +108,9 @@ public class GameManager : MonoBehaviour
 
     public void Continue()
     {
-        board.enabled = true;
+        gameWinCanvas.SetActive(false); 
         gameWin.interactable = false;
+        board.enabled = true;
     }
 
 }

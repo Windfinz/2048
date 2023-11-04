@@ -54,10 +54,7 @@ public class Tile : MonoBehaviour
 
         StartCoroutine(Animate(cell.transform.position, true));
 
-        if(number == 2048)
-        {
-            gameManager.WinGame();
-        }
+        
 
     }
 

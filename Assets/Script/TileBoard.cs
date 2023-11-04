@@ -128,6 +128,11 @@ public class TileBoard : MonoBehaviour
 
         b.SetState(tileStates[index], number);
 
+        if (number == 2048)
+        {
+            gameManager.WinGame();
+        }
+
         gameManager.InscreaseScore(number);
     }
 
